@@ -499,7 +499,7 @@
                   </sap:WorkflowViewStateService.ViewState>
                   <Transition.Condition>[SystemException IsNot Nothing]</Transition.Condition>
                   <Transition.To>
-                    <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Read configuration file and initialize applications used in the process." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="232,117" sap2010:WorkflowViewState.IdRef="State_2">
+                    <State x:Name="__ReferenceID3" sap2010:Annotation.AnnotationText="Read configuration file and initialize applications used in the process." DisplayName="Initialization" sap:VirtualizedContainerService.HintSize="516,3185" sap2010:WorkflowViewState.IdRef="State_2">
                       <State.Entry>
                         <TryCatch DisplayName="Try initializing settings and applications" sap:VirtualizedContainerService.HintSize="470,2766" sap2010:WorkflowViewState.IdRef="TryCatch_2">
                           <sap:WorkflowViewStateService.ViewState>
@@ -607,12 +607,10 @@
                               </If>
                               <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke InitiAllApplications workflow" sap:VirtualizedContainerService.HintSize="434,177" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_5" UnSafe="False" WorkflowFileName="Framework\InitAllApplications.xaml">
                                 <ui:InvokeWorkflowFile.Arguments>
-                                  <InOutArgument x:TypeArguments="s:String[]" x:Key="io_SheetsName">[SheetNames]</InOutArgument>
-                                  <InOutArgument x:TypeArguments="sd:DataTable" x:Key="io_dt_TransactioTable">[dt_TransactionData]</InOutArgument>
                                   <InOutArgument x:TypeArguments="scg:Dictionary(x:String, x:Object)" x:Key="in_Config">[Config]</InOutArgument>
                                 </ui:InvokeWorkflowFile.Arguments>
                               </ui:InvokeWorkflowFile>
-                              <If Condition="[isNothing(dt_TransactionData) OrElse dt_TransactionData.RowCount=0]" DisplayName="If Data Table is Empty" sap:VirtualizedContainerService.HintSize="418,596" sap2010:WorkflowViewState.IdRef="If_15">
+                              <If Condition="[isNothing(dt_TransactionData) OrElse dt_TransactionData.RowCount=0]" DisplayName="If Data Table is Empty" sap:VirtualizedContainerService.HintSize="434,619" sap2010:WorkflowViewState.IdRef="If_15">
                                 <If.Then>
                                   <Sequence DisplayName="Then" sap:VirtualizedContainerService.HintSize="416,401" sap2010:WorkflowViewState.IdRef="Sequence_40">
                                     <sap:WorkflowViewStateService.ViewState>
