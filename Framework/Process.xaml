@@ -115,7 +115,7 @@
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="812,757" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="972,5259" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_Workbook2" />
       <Variable x:TypeArguments="x:String" Name="LookupValue" />
@@ -129,8 +129,8 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="450,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
-    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_workbook3]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="450,120" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="Sheet0" WorkbookPath="[in_Config(&quot;Workbook3_Path&quot;).ToString()]">
+    <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="693,173" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
+    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_workbook3]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="693,120" sap2010:WorkflowViewState.IdRef="ReadRange_3" SheetName="Sheet0" WorkbookPath="[in_Config(&quot;FUSIONRegistrationReport_FilePath&quot;).ToString()]">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -138,10 +138,10 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </ui:ReadRange>
-    <Sequence sap2010:Annotation.AnnotationText="This step checks whether the entered promocode is registered in Workbook 3. &#xD;&#xA;If the promocode exists, it retrieves the associated user and compares the user &#xD;&#xA;with records in Workbook 2. If the same user is found in Workbook 2, the user name&#xD;&#xA;and user match/missmach details are written into Workbook 2 for reference.&#xD;&#xA;" DisplayName="Sequence- User Verification" sap:VirtualizedContainerService.HintSize="450,189" sap2010:WorkflowViewState.IdRef="Sequence_30">
+    <Sequence sap2010:Annotation.AnnotationText="This step checks whether the entered promocode is registered in Workbook 3. &#xA;If the promocode exists, it retrieves the associated user and compares the user &#xA;with records in Workbook 2. If the same user is found in Workbook 2, the user name&#xA;and user match/missmach details are written into Workbook 2 for reference.&#xA;" DisplayName="Sequence- User Verification" sap:VirtualizedContainerService.HintSize="693,2442" sap2010:WorkflowViewState.IdRef="Sequence_30">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
@@ -166,7 +166,7 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_Workbook2]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="587,120" sap2010:WorkflowViewState.IdRef="ReadRange_4" SheetName="[currentText]" WorkbookPath="[in_Config(&quot;Workbook2_Path&quot;).ToString()]" />
+                    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_Workbook2]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="587,120" sap2010:WorkflowViewState.IdRef="ReadRange_4" SheetName="[currentText]" WorkbookPath="[in_Config(&quot;COMP Passes Master_FilePath&quot;).ToString()]" />
                     <ui:ForEachRow ColumnNames="{x:Null}" CurrentIndex="{x:Null}" DataTable="[dt_Workbook2]" DisplayName="For Each Row in Data Table" sap:VirtualizedContainerService.HintSize="587,1545" sap2010:WorkflowViewState.IdRef="ForEachRow_3">
                       <ui:ForEachRow.Body>
                         <ActivityAction x:TypeArguments="sd:DataRow">
@@ -298,7 +298,7 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:ForEachRow>
-                    <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_WorkBook2]" DisplayName="Updating Excel Workbook2" sap:VirtualizedContainerService.HintSize="587,139" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="[currentText]" WorkbookPath="[in_config(&quot;Workbook2_Path&quot;).ToString]">
+                    <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_WorkBook2]" DisplayName="Updating Excel Workbook2" sap:VirtualizedContainerService.HintSize="587,139" sap2010:WorkflowViewState.IdRef="WriteRange_4" SheetName="[currentText]" WorkbookPath="[in_config(&quot;COMP Passes Master_FilePath&quot;).ToString]">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -329,10 +329,10 @@
         </If.Else>
       </If>
     </Sequence>
-    <Sequence sap2010:Annotation.AnnotationText="This step calculates the date difference between the Monitoring Date and the &#xD;&#xA;Code Assign Date. Based on the calculated difference, the process determines &#xD;&#xA;the user’s registration status and writes whether the user is &quot;Registered Already&quot; &#xD;&#xA;or &quot;Not Registered&quot; into the output.&#xD;&#xA;" DisplayName="Sequence- AgingMonitoring" sap:VirtualizedContainerService.HintSize="450,180" sap2010:WorkflowViewState.IdRef="Sequence_38">
+    <Sequence sap2010:Annotation.AnnotationText="This step calculates the date difference between the Monitoring Date and the &#xA;Code Assign Date. Based on the calculated difference, the process determines &#xA;the user’s registration status and writes whether the user is &quot;Registered Already&quot; &#xA;or &quot;Not Registered&quot; into the output.&#xA;" DisplayName="Sequence- AgingMonitoring" sap:VirtualizedContainerService.HintSize="693,2429" sap2010:WorkflowViewState.IdRef="Sequence_38">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
           <x:Boolean x:Key="IsPinned">False</x:Boolean>
           <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
         </scg:Dictionary>
@@ -350,7 +350,7 @@
           <OutArgument x:TypeArguments="x:String">[LookupValue]</OutArgument>
         </ui:LookupDataTable.CellValue>
       </ui:LookupDataTable>
-      <If Condition="[Not String.IsNullOrEmpty(LookupValue)]" sap:VirtualizedContainerService.HintSize="515,971" sap2010:WorkflowViewState.IdRef="If_8">
+      <If Condition="[Not String.IsNullOrEmpty(LookupValue)]" DisplayName="If Promocode Registered" sap:VirtualizedContainerService.HintSize="515,971" sap2010:WorkflowViewState.IdRef="If_8">
         <sap:WorkflowViewStateService.ViewState>
           <scg:Dictionary x:TypeArguments="x:String, x:Object">
             <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -535,7 +535,7 @@
                         </scg:List>
                       </ui:FilterDataTable.SelectColumns>
                     </ui:FilterDataTable>
-                    <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_FilterDataTable]" DisplayName="Updating Excel Workbook1" sap:VirtualizedContainerService.HintSize="382,139" sap2010:WorkflowViewState.IdRef="WriteRange_5" SheetName="[currentText]" WorkbookPath="[in_config(&quot;Workbook1_Path&quot;).ToString]">
+                    <ui:WriteRange StartingCell="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_FilterDataTable]" DisplayName="Updating Excel Workbook1" sap:VirtualizedContainerService.HintSize="382,139" sap2010:WorkflowViewState.IdRef="WriteRange_5" SheetName="[currentText]" WorkbookPath="[in_config(&quot;CompCodeTracker_FilePath&quot;).ToString]">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsExpanded">True</x:Boolean>

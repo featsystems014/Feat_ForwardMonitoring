@@ -109,10 +109,18 @@
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ExcelProcess" sap:VirtualizedContainerService.HintSize="812,1210" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ExcelProcess" sap:VirtualizedContainerService.HintSize="972,1210" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_ExcelDataTable" />
       <Variable x:TypeArguments="scg:List(x:String)" Name="SheetName" />
+      <Variable x:TypeArguments="x:Int32" Name="index">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">ForEach`1_1</x:String>
+            <x:String x:Key="SourcePropertyName">CurrentIndex</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -134,7 +142,7 @@
           <InArgument x:TypeArguments="s:String[]">[CType(in_config("SheetNames"), String).Split(",").Select(Function(s) s.Trim()).ToArray()]</InArgument>
         </Assign.Value>
       </Assign>
-      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="454,817" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[out_SheetsName]">
+      <ui:ForEach x:TypeArguments="x:String" CurrentIndex="[index]" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="454,817" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[out_SheetsName]">
         <ui:ForEach.Body>
           <ActivityAction x:TypeArguments="x:String">
             <ActivityAction.Argument>
@@ -154,7 +162,7 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[out_dt_ExcelData]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="382,111" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="[currentText]" WorkbookPath="[in_config(&quot;Workbook1_Path&quot;).ToString]" />
+                    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[out_dt_ExcelData]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="382,111" sap2010:WorkflowViewState.IdRef="ReadRange_2" SheetName="[currentText]" WorkbookPath="[in_config(&quot;CompCodeTracker_FilePath&quot;).ToString]" />
                   </Sequence>
                 </If.Then>
                 <If.Else>
@@ -164,7 +172,7 @@
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_ExcelDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="382,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[currentText]" WorkbookPath="[in_config(&quot;Workbook1_Path&quot;).ToString]" />
+                    <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_ExcelDataTable]" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="382,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[currentText]" WorkbookPath="[in_config(&quot;CompCodeTracker_FilePath&quot;).ToString]" />
                     <ui:MergeDataTable Destination="[out_dt_ExcelData]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="382,156" sap2010:WorkflowViewState.IdRef="MergeDataTable_2" MissingSchemaAction="Add" Source="[dt_ExcelDataTable]">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
