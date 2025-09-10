@@ -1,9 +1,7 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="Test" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:s="clr-namespace:System;assembly=System.Private.CoreLib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="Test" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:f="clr-namespace:Feat_ForwardMonitoring_Entity;assembly=DataService.Feat_ForwardMonitoring_Entity" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:uda="clr-namespace:UiPath.DataService.Activities;assembly=UiPath.DataService.Activities.Core" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="out_SheetsName" Type="OutArgument(s:String[])" />
-    <x:Property Name="out_TotalTransaction" Type="OutArgument(scg:List(sd:DataRow))" />
-    <x:Property Name="out_TransactionData" Type="OutArgument(scg:Dictionary(x:String, sd:DataTable))" />
+    <x:Property Name="out_dtTransactionData" Type="OutArgument(sd:DataTable)" />
   </x:Members>
   <VisualBasic.Settings>
     <x:Null />
@@ -46,6 +44,18 @@
       <x:String>System.Activities.Runtime.Collections</x:String>
       <x:String>System.Linq.Expressions</x:String>
       <x:String>System.Numerics</x:String>
+      <x:String>UiPath.DataService.Activities</x:String>
+      <x:String>UiPath.DataService.Definition</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>Feat_ForwardAssignment_Final</x:String>
+      <x:String>UiPath.DataService.Activities.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models.FilterBuilder</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Models</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Helpers.TypeDetailsCustomization</x:String>
+      <x:String>UiPath.IntegrationService.Activities.Runtime.Activities</x:String>
+      <x:String>UiPath.Platform.Activities</x:String>
+      <x:String>UiPath.IntegrationService.Activities.SWEntities.CB8BD24DFE7_FeatForwardEntity.Bundle</x:String>
+      <x:String>Feat_ForwardMonitoring_Entity</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -102,20 +112,72 @@
       <AssemblyReference>System.Collections.Immutable</AssemblyReference>
       <AssemblyReference>System.Linq.Queryable</AssemblyReference>
       <AssemblyReference>System.Runtime.Numerics</AssemblyReference>
+      <AssemblyReference>netstandard</AssemblyReference>
+      <AssemblyReference>UiPath.DataService.Activities.Core</AssemblyReference>
+      <AssemblyReference>UiPath.DataService.Definition</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>DataService.Feat_ForwardAssignment_Final</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>UiPath.IntegrationService.Activities.Runtime</AssemblyReference>
+      <AssemblyReference>CB8BD24DFE7_FeatForw.z3reH4hFV3D1RXxMb1NGIol3</AssemblyReference>
+      <AssemblyReference>DataService.Feat_ForwardMonitoring_Entity</AssemblyReference>
+      <AssemblyReference>System.Reflection.MetadataLoadContext</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="Test" sap:VirtualizedContainerService.HintSize="1092,813" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="Test" sap:VirtualizedContainerService.HintSize="889,1212" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="scg:List(x:String)" Name="ColumnNames" />
+      <Variable x:TypeArguments="scg:IList(f:FeatForwardEntity)" Name="EntityOutputRecords" />
+      <Variable x:TypeArguments="x:Int32" Name="index">
+        <sap:WorkflowViewStateService.ViewState>
+          <scg:Dictionary x:TypeArguments="x:String, x:Object">
+            <x:String x:Key="SourceIdRef">ForEach`1_7</x:String>
+            <x:String x:Key="SourcePropertyName">CurrentIndex</x:String>
+          </scg:Dictionary>
+        </sap:WorkflowViewStateService.ViewState>
+      </Variable>
+    </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <Assign DisplayName="Assing out_TransactionData (initialization)" sap:VirtualizedContainerService.HintSize="470,114" sap2010:WorkflowViewState.IdRef="Assign_1">
+    <uda:QueryEntityRecords x:TypeArguments="f:FeatForwardEntity" TotalRecords="{x:Null}" ContinueOnError="False" DisplayName="Query Entity Records" EntityId="182fb3fd-248a-f011-b484-6045bda55b31" ExpansionDepth="2" sap:VirtualizedContainerService.HintSize="434,172" sap2010:WorkflowViewState.IdRef="QueryEntityRecords`1_2" OutputRecords="[EntityOutputRecords]" QueriedEntityId="182fb3fd-248a-f011-b484-6045bda55b31" Skip="0" SortAscending="True" SortByField="Id" TimeoutInMs="30000" Top="100">
+      <uda:QueryEntityRecords.FilterArguments>
+        <uda:FilterArgument FilterActivityType="{x:Null}">
+          <uda:FilterArgument.Filter>
+            <uda:GroupFilter Index="0" Operator="AND">
+              <uda:GroupFilter.Filters>
+                <scg:List x:TypeArguments="uda:SimpleFilter" Capacity="4">
+                  <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="Id" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="not empty" ValueIndex="0" />
+                  <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="CompPassRegCode" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="not empty" ValueIndex="1" />
+                  <uda:SimpleFilter ExpressionValue="{x:Null}" FieldName="HasAVPApprovedApprovedDeclinedPending" FieldType="UiPath.DataService.Core.Models.EntityField" Operator="not empty" ValueIndex="2" />
+                </scg:List>
+              </uda:GroupFilter.Filters>
+              <uda:GroupFilter.Groups>
+                <scg:List x:TypeArguments="uda:GroupFilter" Capacity="0" />
+              </uda:GroupFilter.Groups>
+            </uda:GroupFilter>
+          </uda:FilterArgument.Filter>
+        </uda:FilterArgument>
+      </uda:QueryEntityRecords.FilterArguments>
+      <uda:QueryEntityRecords.FilterValues>
+        <scg:List x:TypeArguments="InArgument" Capacity="4">
+          <x:Null />
+          <x:Null />
+          <x:Null />
+        </scg:List>
+      </uda:QueryEntityRecords.FilterValues>
+    </uda:QueryEntityRecords>
+    <Assign sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_8">
       <Assign.To>
-        <OutArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[out_TransactionData]</OutArgument>
+        <OutArgument x:TypeArguments="scg:List(x:String)">[ColumnNames]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="scg:Dictionary(x:String, sd:DataTable)">[New Dictionary(Of String, System.Data.DataTable)]</InArgument>
+        <InArgument x:TypeArguments="scg:List(x:String)">[GetType(Feat_ForwardMonitoring_Entity.FeatForwardEntity).GetProperties().Select(Function(p) p.Name).ToList()]</InArgument>
       </Assign.Value>
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -124,57 +186,60 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <Assign sap:VirtualizedContainerService.HintSize="470,114" sap2010:WorkflowViewState.IdRef="Assign_4">
+    <Assign DisplayName="Assing out_TransactionData (initialization)" sap:VirtualizedContainerService.HintSize="434,114" sap2010:WorkflowViewState.IdRef="Assign_9">
       <Assign.To>
-        <OutArgument x:TypeArguments="s:String[]">[out_SheetsName]</OutArgument>
+        <OutArgument x:TypeArguments="sd:DataTable">[out_dtTransactionData]</OutArgument>
       </Assign.To>
       <Assign.Value>
-        <InArgument x:TypeArguments="s:String[]">[CType(in_config("Excel_SheetNames"), String).Split(",").Select(Function(s) s.Trim()).ToArray()]</InArgument>
+        <InArgument x:TypeArguments="sd:DataTable">[New DataTable]</InArgument>
       </Assign.Value>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
     </Assign>
-    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For each area sheet" sap:VirtualizedContainerService.HintSize="470,457" sap2010:WorkflowViewState.IdRef="ForEach`1_1" Values="[out_SheetsName]">
+    <ui:ForEach x:TypeArguments="x:String" CurrentIndex="[index]" DisplayName="For Each currentText" sap:VirtualizedContainerService.HintSize="434,399" sap2010:WorkflowViewState.IdRef="ForEach`1_7" Values="[ColumnNames]">
       <ui:ForEach.Body>
         <ActivityAction x:TypeArguments="x:String">
           <ActivityAction.Argument>
-            <DelegateInArgument x:TypeArguments="x:String" Name="Sheet" />
+            <DelegateInArgument x:TypeArguments="x:String" Name="currentText" />
           </ActivityAction.Argument>
-          <Sequence sap2010:Annotation.AnnotationText="Read all  area data from the Forward_COMP Passes Master file and add them to the Transaction dictionary." DisplayName="Get Workbook Data" sap:VirtualizedContainerService.HintSize="468,327" sap2010:WorkflowViewState.IdRef="Sequence_8">
-            <Sequence.Variables>
-              <Variable x:TypeArguments="sd:DataTable" Name="dt_SheetData" />
-            </Sequence.Variables>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,269" sap2010:WorkflowViewState.IdRef="Sequence_14">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-                <x:Boolean x:Key="IsPinned">False</x:Boolean>
-                <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ReadRange Range="{x:Null}" WorkbookPathResource="{x:Null}" AddHeaders="True" DataTable="[dt_SheetData]" DisplayName="Read range (Settings and Constants sheets)" sap:VirtualizedContainerService.HintSize="434,120" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="[Sheet]" WorkbookPath="[in_Config(&quot;CompCodeTracker_FilePath&quot;).ToString]" />
-            <Assign DisplayName="Assign Sheet Name as Key and Data Table as Values" sap:VirtualizedContainerService.HintSize="434,105" sap2010:WorkflowViewState.IdRef="Assign_5">
-              <Assign.To>
-                <OutArgument x:TypeArguments="sd:DataTable">[out_TransactionData(Sheet)]</OutArgument>
-              </Assign.To>
-              <Assign.Value>
-                <InArgument x:TypeArguments="sd:DataTable">[dt_SheetData]</InArgument>
-              </Assign.Value>
-            </Assign>
+            <ui:AddDataColumn x:TypeArguments="x:Object" AllowDBNull="{x:Null}" Column="{x:Null}" DefaultValue="{x:Null}" MaxLength="{x:Null}" Unique="{x:Null}" AutoIncrement="True" ColumnName="[currentText.ToString]" DataTable="[out_dtTransactionData]" DisplayName="Add Data Column" sap:VirtualizedContainerService.HintSize="382,209" sap2010:WorkflowViewState.IdRef="AddDataColumn`1_1">
+              <sap:WorkflowViewStateService.ViewState>
+                <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                  <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                  <x:Boolean x:Key="IsPinned">False</x:Boolean>
+                </scg:Dictionary>
+              </sap:WorkflowViewStateService.ViewState>
+            </ui:AddDataColumn>
           </Sequence>
         </ActivityAction>
       </ui:ForEach.Body>
-      <sap:WorkflowViewStateService.ViewState>
-        <scg:Dictionary x:TypeArguments="x:String, x:Object">
-          <x:Boolean x:Key="IsExpanded">True</x:Boolean>
-          <x:Boolean x:Key="IsPinned">False</x:Boolean>
-        </scg:Dictionary>
-      </sap:WorkflowViewStateService.ViewState>
     </ui:ForEach>
-    <Assign DisplayName="Merge all the values(DataTable Row) in a List to Make it Transactional Data" sap:VirtualizedContainerService.HintSize="470,105" sap2010:WorkflowViewState.IdRef="Assign_6">
-      <Assign.To>
-        <OutArgument x:TypeArguments="scg:List(sd:DataRow)">[out_TotalTransaction]</OutArgument>
-      </Assign.To>
-      <Assign.Value>
-        <InArgument x:TypeArguments="scg:List(sd:DataRow)">[out_TransactionData.Values.SelectMany(Function(dt) dt.AsEnumerable()).ToList()]</InArgument>
-      </Assign.Value>
-    </Assign>
+    <ui:ForEach x:TypeArguments="f:FeatForwardEntity" CurrentIndex="{x:Null}" DisplayName="For Each currentFeatForwardEntity" sap:VirtualizedContainerService.HintSize="434,390" sap2010:WorkflowViewState.IdRef="ForEach`1_8" Values="[EntityOutputRecords]">
+      <ui:ForEach.Body>
+        <ActivityAction x:TypeArguments="f:FeatForwardEntity">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="f:FeatForwardEntity" Name="currentFeatForwardEntity" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="416,269" sap2010:WorkflowViewState.IdRef="Sequence_15">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[New Object() {currentFeatForwardEntity.CreatedBy, currentFeatForwardEntity.UpdatedBy, currentFeatForwardEntity.Id, currentFeatForwardEntity.AccountOwner, currentFeatForwardEntity.AccountOwnerEmail, currentFeatForwardEntity.CustomerCompany, currentFeatForwardEntity.CustomerFullName, currentFeatForwardEntity.CustomerTitle, currentFeatForwardEntity.CustomerWorkEmailonly, currentFeatForwardEntity.UiPathRVP, currentFeatForwardEntity.Justification, currentFeatForwardEntity.HasAVPApprovedApprovedDeclinedPending, currentFeatForwardEntity.CompPassRegCode, currentFeatForwardEntity.AreaSheet, currentFeatForwardEntity.Clevelexperiencenomination, currentFeatForwardEntity.HasCustomerdeclinedYN, currentFeatForwardEntity.Cancellationrequestedby, currentFeatForwardEntity.Requestraisingonbehalfof, currentFeatForwardEntity.ApprovalRequiredYN, currentFeatForwardEntity.RegisteredYN, currentFeatForwardEntity.agingsincecodesent, currentFeatForwardEntity.datecodessenttorep, currentFeatForwardEntity.DateofCancelation, currentFeatForwardEntity.datereminder, currentFeatForwardEntity.UpdateTime, currentFeatForwardEntity.CreateTime}]" DataTable="[out_dtTransactionData]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="382,209" sap2010:WorkflowViewState.IdRef="AddDataRow_2" />
+          </Sequence>
+        </ActivityAction>
+      </ui:ForEach.Body>
+    </ui:ForEach>
   </Sequence>
 </Activity>
